@@ -25,8 +25,6 @@ import { TimeagoPipe } from './core/pipes/timeago.pipe';
 import { ProgressbarComponent } from './shared/components/progressbar/progressbar.component';
 import { LoaderService } from './shared/services/loader.service';
 import { LoaderInterceptor } from './shared/interceptors/loader.interceptor';
-// import { SidenavComponent } from './shared/components/sidenav/sidenav.component';
-// import { ToolbarComponent } from './shared/components/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -36,9 +34,7 @@ import { LoaderInterceptor } from './shared/interceptors/loader.interceptor';
     LoginComponent,
     AutoconnectComponent,
     TimeagoPipe,
-    ProgressbarComponent,
-    // SidenavComponent,
-    // ToolbarComponent
+    ProgressbarComponent
   ],
   imports: [
     BrowserModule,
