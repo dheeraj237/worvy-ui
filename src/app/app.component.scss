@@ -1,0 +1,20 @@
+.logoutbtn {
+    flex: bottom;
+    align-items: center;
+}
+
+a {
+    color: rgb(221, 221, 221);
+}
+
+#sidenavactions {
+    height: 100%;
+    widows: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#sidenavactions button { 
+    bottom: 10%;
+    left: 28%;
+}
