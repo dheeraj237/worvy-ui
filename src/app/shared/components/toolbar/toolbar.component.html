@@ -1,1 +1,11 @@
-<p>toolbar works!</p>
+<mat-toolbar id="mainToolbar" color="primary">
+  <mat-icon id="toolbarMenu" (click)="toggleSidenav()">
+    subject
+  </mat-icon>
+  <!-- <mat-icon style="margin-right: 10px;">
+    <img alt="Image" src="assets/img/toolbar-logo.png" style="width: 100%;height: auto;">
+  </mat-icon> -->
+  {{title}}
+  <span class="toolbar-spacer"></span>
+  <!-- <mat-icon class="toolbar-icon" matBadge="8" matBadgePosition="after" matBadgeColor="accent">notifications</mat-icon> -->
+</mat-toolbar>

@@ -10,15 +10,15 @@ import { environment } from '../environments/environment';
 //module
 import { MaterialModule } from './core/modules';
 import { AboutComponent } from './shared/components/about/about.component';
-import { SidenavComponent } from './shared/components/sidenav/sidenav.component';
-import { ToolbarComponent } from './shared/components/toolbar/toolbar.component';
+// import { SidenavComponent } from './shared/components/sidenav/sidenav.component';
+// import { ToolbarComponent } from './shared/components/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
-    SidenavComponent,
-    ToolbarComponent
+    // SidenavComponent,
+    // ToolbarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SidenavService } from '../sidenav/sidenav.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private sidenav: SidenavService) { }
 
   ngOnInit() {
+  }
+
+  toggleSidenav() {
+    console.log('sidenav open')
+    this.sidenav.toggle();
   }
 
 }

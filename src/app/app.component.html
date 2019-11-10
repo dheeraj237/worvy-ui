@@ -1,6 +1,6 @@
 <mat-toolbar id="mainToolbar" color="primary">
   <mat-icon id="toolbarMenu" (click)="sidenav.toggle()">
-    subject
+    menu
   </mat-icon>
   <!-- <mat-icon style="margin-right: 10px;">
     <img alt="Image" src="assets/img/toolbar-logo.png" style="width: 100%;height: auto;">
@@ -27,10 +27,13 @@
       <mat-nav-list>
         <a class="menu-item" mat-list-item routerLink="/devices" (click)=" sidenav.toggle()">
           <mat-icon>
-            question_answer
+            storage
           </mat-icon>Devices
-        </a>
-        <a class="menu-item" mat-list-item routerLink="/about" (click)=" sidenav.toggle()">
+        </a><a class="menu-item" mat-list-item routerLink="/about" (click)=" sidenav.toggle()">
+          <mat-icon>
+            library_books
+          </mat-icon>Autoconnect Guide
+        </a><a class="menu-item" mat-list-item routerLink="/about" (click)=" sidenav.toggle()">
           <mat-icon>
             outlined_flag
           </mat-icon>About Us
