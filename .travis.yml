@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - "9"
+dist: trusty
+sudo: required
+branches:
+  only:
+  - master
+before_script:
+  - npm install -g @angular/cli
+script:
+  # - ng lint
+  # - npm run test-headless
+  - ng build --prod --base-href https://anothergitdev.github.io/worvy-ui/
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist/worvy-ui
+  on:
+    branch: master
