@@ -20,9 +20,9 @@ export class AppComponent {
   title = 'Worvy';
 
   constructor(
+    public overlayContainer: OverlayContainer,
     public afAuth: AngularFireAuth,
-    public auth: AuthService,
-    public overlayContainer: OverlayContainer
+    public auth: AuthService
   ) { }
 
   @HostBinding('class') componentCssClass;
