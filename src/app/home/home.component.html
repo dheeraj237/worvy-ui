@@ -6,4 +6,12 @@
     <p>See the paired Devices or Discover the devices available for first time configurations.</p>
     <button mat-flat-button color="accent" routerLink="/devices" role="button">Devices</button>
     <button mat-flat-button color="accent" routerLink="/autoconnect" role="button">Autoconnect Guide</button>
+    <button mat-flat-button color="accent"
+        onclick="window.location.href = 'intent://#Intent;action=android.intent.action.ACTION_WIRELESS_SETTINGS;end'"
+        mat-fab style="margin-right:7px">
+        <mat-icon>
+            wifi
+        </mat-icon>
+        Wifi
+    </button>
 </div>
