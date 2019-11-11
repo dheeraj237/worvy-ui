@@ -55,7 +55,7 @@
     </mat-list>
     <mat-divider></mat-divider>
     <div id="sidenavactions" *ngIf="afAuth.authState | async">
-      <button mat-raised-button color="warn" (click)="auth.signOut()">
+      <button mat-raised-button color="warn" (click)="auth.signOut(); sidenav.toggle()">
         <mat-icon>
           first_page
         </mat-icon>
