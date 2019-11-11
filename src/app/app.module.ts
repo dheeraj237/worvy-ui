@@ -14,6 +14,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 //module
+import { OverlayModule } from '@angular/cdk/overlay';
 import { MaterialModule } from './core/modules';
 import { AboutComponent } from './shared/components/about/about.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -26,6 +27,8 @@ import { ProgressbarComponent } from './shared/components/progressbar/progressba
 import { LoaderService } from './shared/services/loader.service';
 import { LoaderInterceptor } from './shared/interceptors/loader.interceptor';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +40,7 @@ import { LoaderInterceptor } from './shared/interceptors/loader.interceptor';
     ProgressbarComponent
   ],
   imports: [
+    OverlayModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

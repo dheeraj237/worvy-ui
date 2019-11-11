@@ -7,6 +7,15 @@
   </mat-icon> -->
   <a routerLink="/home">{{title}}</a>
   <span class="toolbar-spacer"></span>
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Change Theme">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <div mat-menu-item>
+      <span>Dark Theme</span>
+      <mat-slide-toggle (change)="onSetTheme($event)"></mat-slide-toggle>
+    </div>
+  </mat-menu>
   <!-- <mat-icon class="toolbar-icon" matBadge="8" matBadgePosition="after" matBadgeColor="accent">notifications</mat-icon> -->
 </mat-toolbar>
 <mat-sidenav-container fullscreen id="sidenavContainer">
