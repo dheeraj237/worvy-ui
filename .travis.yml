@@ -12,6 +12,7 @@ script:
   # - ng lint
   # - npm run test-headless
   - ng build --prod --base-href https://anothergitdev.github.io/worvy-ui/
+  - mv dist/worvy-ui/index.html dist/worvy-ui/404.html
 deploy:
   provider: pages
   skip_cleanup: true
