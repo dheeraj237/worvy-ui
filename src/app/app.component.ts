@@ -34,7 +34,9 @@ export class AppComponent {
   ) {
     const hammertime = new Hammer(elementRef.nativeElement, {});
     hammertime.on('panright', (ev) => {
-      this.sidenav.open();
+      if (ev.center.x >= 1 && ev.center.x <= 70) {
+        this.sidenav.open();
+      }
     });
     hammertime.on('panleft', (ev) => {
       this.sidenav.close();
