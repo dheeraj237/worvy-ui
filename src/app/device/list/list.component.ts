@@ -27,7 +27,7 @@ export class ListComponent implements OnInit {
       //   map((devices => this.devices = devices)));
       // this.pollingDevices$.subscribe((devices: any) => this.devices = devices);
       // get our data every subsequent 10 seconds
-      this.devices$ = timer(0, 5000).pipe(
+      this.devices$ = timer(0, 10000).pipe(
         flatMap(() => this.deviceService.getDevices())
       ).subscribe((devices: any) => this.devices = devices);
 

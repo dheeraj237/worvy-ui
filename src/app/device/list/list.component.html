@@ -1,13 +1,5 @@
 <div class="container mt-3">
-    <!-- <div class="row">
-        <div class="col-12 col-md-4 col-sm-4">
-            <a class="btn btn-primary mr-3" routerLink="/discover" role="button">+ New Device</a>
-        </div>
-        <div class="col-12 col-md-5 col-sm-5">
-            <a class="btn btn-primary mr-3" routerLink="/autoconnect-guide" role="button">Autoconnect Guide</a>
-        </div>
-    </div> -->
-    <button class="btn-block" mat-flat-button color="accent" routerLink="/discover" role="button">
+    <button class="btn-block" mat-flat-button color="accent" routerLink="discover" role="button">
         + New Device
     </button>
     <div class="text-center mt-4" *ngIf="loading">
@@ -15,17 +7,20 @@
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-    <button class="btn p-0 mt-2 btn-block" *ngFor="let device of devices" type="button">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">device name : {{device?.name ? device?.name : 'Unnamed'}}</h4>
-                <p class="card-title">deviceid : {{device.deviceid}}</p>
-                <p class="card-text">LoadScale : {{device.loadscale}}</p>
+    <button class="btn-block mt-3" mat-button *ngFor="let device of devices" type="button">
+        <mat-card>
+            <mat-card-content>
+                <h4>device name : {{device?.name ? device?.name : 'Unnamed'}}</h4>
+                <mat-divider></mat-divider>
+                <!-- <p>deviceid : {{device.deviceid}}</p> -->
+                <p>LoadScale : {{device.loadscale}}</p>
+                <p>Wifi Strength : {{device.wifirssi}}</p>
+                <p>Local ip : {{device.localip}}</p>
                 <!-- <p class="card-text"><code>{{device | json}}</code></p> -->
-                <p class="card-text"><small class="text-muted">Last Published
+                <p><small class="text-muted">Last Published
                         {{device.timestamp | date: 'medium'}}</small></p>
-            </div>
-        </div>
+            </mat-card-content>
+        </mat-card>
     </button>
 
 </div>
