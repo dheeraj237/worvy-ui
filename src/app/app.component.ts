@@ -1,11 +1,13 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from './core/services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { RouterOutlet, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, Router, RouterEvent } from '@angular/router';
 import { slideInAnimation } from './shared/route.animation';
 
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { MatSlideToggleChange } from '@angular/material';
+import { MatSlideToggleChange, MatSidenav } from '@angular/material';
+
+import * as Hammer from 'hammerjs';
 
 @Component({
   selector: 'app-root',
@@ -20,12 +22,24 @@ export class AppComponent {
   title = 'Worvy';
   routerLoading = false;
 
+  @ViewChild('sidenav', { static: true })
+  public sidenav: MatSidenav;
+
   constructor(
     private overlayContainer: OverlayContainer,
     public afAuth: AngularFireAuth,
     public auth: AuthService,
-    private router: Router
+    private router: Router,
+    elementRef: ElementRef
   ) {
+    const hammertime = new Hammer(elementRef.nativeElement, {});
+    hammertime.on('panright', (ev) => {
+      this.sidenav.open();
+    });
+    hammertime.on('panleft', (ev) => {
+      this.sidenav.close();
+    });
+
     this.router.events.subscribe((event: RouterEvent) => {
       switch (true) {
         case event instanceof NavigationStart: {
