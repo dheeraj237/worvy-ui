@@ -16,7 +16,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 //module
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MaterialModule } from './core/modules';
-import { AboutComponent } from './shared/components/about/about.component';
+import { AboutComponent } from './guide/about/about.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { DeviceModule } from './device/device.module';

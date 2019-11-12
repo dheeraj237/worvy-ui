@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AboutComponent } from './shared/components/about/about.component';
+import { AboutComponent } from './guide/about/about.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './core/guards/guard.guard';
 import { HomeComponent } from './home/home.component';
@@ -12,21 +12,24 @@ const routes: Routes = [
 
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard], 
-    data: { 
-      animation: 'HomePage' 
+  {
+    path: 'home', component: HomeComponent, canActivate: [AuthGuard],
+    data: {
+      animation: 'HomePage'
     }
   },
-  { path: 'devices', component: ListComponent, canActivate: [AuthGuard], 
-    data: { 
-      animation: 'DevicePage' 
-    } 
+  {
+    path: 'devices', component: ListComponent, canActivate: [AuthGuard],
+    data: {
+      animation: 'DevicePage'
+    }
   },
   { path: 'autoconnect', component: AutoconnectComponent, canActivate: [AuthGuard] },
-  { path: 'about', component: AboutComponent, 
-    data: { 
-      animation: 'AboutPage' 
-    } 
+  {
+    path: 'about', component: AboutComponent,
+    data: {
+      animation: 'AboutPage'
+    }
   }
 ];
 
