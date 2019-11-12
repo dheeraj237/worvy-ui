@@ -12,10 +12,22 @@ const routes: Routes = [
 
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard], data: { animation: 'HomePage' } },
-  { path: 'devices', component: ListComponent, canActivate: [AuthGuard], data: { animation: 'DevicePage' } },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard], 
+    data: { 
+      animation: 'HomePage' 
+    }
+  },
+  { path: 'devices', component: ListComponent, canActivate: [AuthGuard], 
+    data: { 
+      animation: 'DevicePage' 
+    } 
+  },
   { path: 'autoconnect', component: AutoconnectComponent, canActivate: [AuthGuard] },
-  { path: 'about', component: AboutComponent, data: { animation: 'AboutPage' } }
+  { path: 'about', component: AboutComponent, 
+    data: { 
+      animation: 'AboutPage' 
+    } 
+  }
 ];
 
 @NgModule({

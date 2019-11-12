@@ -1,7 +1,7 @@
 import { Component, HostBinding } from '@angular/core';
 import { AuthService } from './core/services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, Router, RouterEvent } from '@angular/router';
 import { slideInAnimation } from './shared/route.animation';
 
 import { OverlayContainer } from '@angular/cdk/overlay';
@@ -18,12 +18,33 @@ import { MatSlideToggleChange } from '@angular/material';
 })
 export class AppComponent {
   title = 'Worvy';
+  routerLoading = false;
 
   constructor(
-    public overlayContainer: OverlayContainer,
+    private overlayContainer: OverlayContainer,
     public afAuth: AngularFireAuth,
-    public auth: AuthService
-  ) { }
+    public auth: AuthService,
+    private router: Router
+  ) {
+    this.router.events.subscribe((event: RouterEvent) => {
+      switch (true) {
+        case event instanceof NavigationStart: {
+          this.routerLoading = true;
+          break;
+        }
+
+        case event instanceof NavigationEnd:
+        case event instanceof NavigationCancel:
+        case event instanceof NavigationError: {
+          this.routerLoading = false;
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    });
+  }
 
   @HostBinding('class') componentCssClass;
 

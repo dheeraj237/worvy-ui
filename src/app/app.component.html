@@ -1,3 +1,4 @@
+<app-progressbar></app-progressbar>
 <mat-toolbar id="mainToolbar" color="primary">
   <mat-icon id="toolbarMenu" (click)="sidenav.toggle()">
     menu
@@ -73,11 +74,15 @@
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-progressbar></app-progressbar>
     <!-- chatbot dialogue component -->
     <!-- <app-chat-dialogue></app-chat-dialogue> -->
     <div [@routeAnimations]="prepareRoute(outlet)">
-      <router-outlet #outlet="outlet"></router-outlet>
+      <router-outlet #outlet="outlet">
+        <div *ngIf="routerLoading" class="ldr-blank">
+          <i class="fa fa-spinner fa-pulse fa-fw"></i>
+          <span class="sr-only">Loading...</span>
+        </div>
+      </router-outlet>
     </div>
     <!-- <router-outlet></router-outlet> -->
   </mat-sidenav-content>
