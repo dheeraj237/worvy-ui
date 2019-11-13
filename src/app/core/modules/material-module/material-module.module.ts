@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatProgressBarModule, MatMenuModule, MatSlideToggleModule, MatDividerModule, MatGridListModule, MatTabsModule } from '@angular/material';
+import { MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatProgressBarModule, MatMenuModule, MatSlideToggleModule, MatDividerModule, MatGridListModule, MatTabsModule, MatStepperModule } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
 export const MY_FORMATS = {
@@ -54,7 +54,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatSlideToggleModule,
     MatDividerModule,
     MatGridListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatStepperModule
   ],
   exports: [
     MatToolbarModule,
@@ -76,7 +77,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatSlideToggleModule,
     MatDividerModule,
     MatGridListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatStepperModule
 
   ],
   providers: [
