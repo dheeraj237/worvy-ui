@@ -12,7 +12,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'devices/discover', component: DiscoverComponent, canActivate: [AuthGuard], data: {
+    path: 'devices/discover', component: DiscoverComponent, data: {
       animation: 'DiscoverPage'
     }
   },

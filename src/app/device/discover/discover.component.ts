@@ -15,10 +15,9 @@ export class DiscoverComponent implements OnInit {
   @ViewChild('matgroup', { static: true }) matgroup: MatTabGroup;
   @ViewChild('stepper', { static: true }) matStepper: MatStepper;
 
-  hosts: string[] = ['jsonplaceholder.typicode.com/todos/1', '192.168.43.91', '192.168.43.95', '192.168.43.97'];
+  hosts: string[] = ['192.168.43.91', 'orion.local', '172.217.28.1'];
   public connected$ = new BehaviorSubject<string>('');
   public connState: boolean;
-
   constructor(
     private httpClient: HttpClient,
   ) { }
@@ -28,7 +27,7 @@ export class DiscoverComponent implements OnInit {
       if (connected) {
         console.log("Connected: ", connected);
       }
-    });
+    }, err => console.log(err));
   }
 
   nextTab(tabGroup: MatTabGroup) {
@@ -51,21 +50,23 @@ export class DiscoverComponent implements OnInit {
   }
 
   startPIng() {
+    console.log('ping started...')
     let pingData = { id: 1, action: 'ping' };
     this.hosts.forEach(host => {
-      this.httpClient.get('http://' + host, {
-        observe: 'response'
-      })
+      this.httpClient.post(`http://${host}/_ac`, pingData)
         .pipe(first())
-        .subscribe(resp => {
-          console.log(resp)
-          if (resp.status === 200) {
-            this.connected(host);
-          } else {
-            this.connected('');
+        .subscribe(
+          err => {
+            console.log('HTTP Error', err);
+          },
+          resp => {
+            if (resp.status === 200) {
+              this.connected(host);
+            } else {
+              this.connected('');
+            }
           }
-        }, err => this.connected(''));
-
+        );
     });
 
   }
