@@ -15,7 +15,7 @@ export class DiscoverComponent implements OnInit {
   @ViewChild('matgroup', { static: true }) matgroup: MatTabGroup;
   @ViewChild('stepper', { static: true }) matStepper: MatStepper;
 
-  hosts: string[] = ['192.168.43.91', 'orion.local', '172.217.28.1'];
+  hosts: string[] = ['192.168.4.1', 'orion.local', '172.217.28.1'];
   public connected$ = new BehaviorSubject<string>('');
   public connState: boolean;
   constructor(
@@ -50,10 +50,11 @@ export class DiscoverComponent implements OnInit {
   }
 
   startPIng() {
+    //http://192.168.4.1/wifisave?s=OnePlus+5&p=12345687
     console.log('ping started...')
     let pingData = { id: 1, action: 'ping' };
     this.hosts.forEach(host => {
-      this.httpClient.post(`http://${host}/_ac`, pingData)
+      this.httpClient.get(`http://${host}/`, { observe: 'response' })
         .pipe(first())
         .subscribe(
           err => {
