@@ -15,14 +15,19 @@ export class DiscoverComponent implements OnInit {
   @ViewChild('matgroup', { static: true }) matgroup: MatTabGroup;
   @ViewChild('stepper', { static: true }) matStepper: MatStepper;
 
-  hosts: string[] = ['192.168.4.1', 'orion.local', '172.217.28.1'];
+  hosts: string[] = ['192.168.4.1/ping', '172.217.28.1'];
   public connected$ = new BehaviorSubject<string>('');
   public connState: boolean;
+
+  location: Location;
   constructor(
     private httpClient: HttpClient,
   ) { }
 
   ngOnInit() {
+    if (location.protocol === 'https:') {
+      window.location.href = location.href.replace('https', 'http');
+    }
     this.connected$.subscribe(connected => {
       if (connected) {
         console.log("Connected: ", connected);
@@ -54,18 +59,16 @@ export class DiscoverComponent implements OnInit {
     console.log('ping started...')
     let pingData = { id: 1, action: 'ping' };
     this.hosts.forEach(host => {
-      this.httpClient.get(`http://${host}/`, { observe: 'response' })
+      this.httpClient.post(`http://${host}/`, pingData, { responseType: 'text' })
         .pipe(first())
         .subscribe(
+
+          resp => {
+            console.log("ping response > ", resp)
+            this.connected(host);
+          },
           err => {
             console.log('HTTP Error', err);
-          },
-          resp => {
-            if (resp.status === 200) {
-              this.connected(host);
-            } else {
-              this.connected('');
-            }
           }
         );
     });
@@ -75,6 +78,12 @@ export class DiscoverComponent implements OnInit {
 
   connected(data: string) {
     this.connected$.next(data);
+  }
+
+  ngOnDestroy() {
+    if (location.protocol === 'http:') {
+      window.location.href = location.href.replace('http', 'https');
+    }
   }
 
 }
