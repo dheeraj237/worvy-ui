@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './core/guards/guard.guard';
 import { HomeComponent } from './home/home.component';
 import { AutoconnectComponent } from './guide/autoconnect/autoconnect.component';
+import { DiscoverComponent } from './device/discover/discover.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,12 @@ const routes: Routes = [
     path: 'about', component: AboutComponent,
     data: {
       animation: 'AboutPage'
+    }
+  },
+  {
+    path: 'discover-devices', component: DiscoverComponent,
+    data: {
+      animation: 'DiscoverPage'
     }
   }
 ];

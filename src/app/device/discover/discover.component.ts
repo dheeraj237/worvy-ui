@@ -25,6 +25,7 @@ export class DiscoverComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    window.location.href = "http://worvy-ui.s3-website.ap-south-1.amazonaws.com/discover-devices"
     this.connected$.subscribe(connected => {
       if (connected) {
         console.log("Connected: ", connected);
@@ -51,6 +52,7 @@ export class DiscoverComponent implements OnInit {
     if (stepGrp.selectedIndex < stepGrp._steps.length - 1) {
       this.matStepper.selectedIndex++;
     } else {
+
       this.matStepper.selectedIndex = 0;
     }
   }
@@ -89,7 +91,7 @@ export class DiscoverComponent implements OnInit {
 
   goToUnSecure() {
     if (location.protocol === 'http:') {
-      window.location.href = location.href.replace('http', 'https');
+      window.location.href = ""
     }
   }
 
