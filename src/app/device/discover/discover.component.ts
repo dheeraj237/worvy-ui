@@ -25,9 +25,10 @@ export class DiscoverComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    window.location.href = "http://worvy-ui.s3-website.ap-south-1.amazonaws.com/discover-devices"
     this.connected$.subscribe(connected => {
       if (connected) {
+
+        // window.location.href = "https://anothergitdev.github.io/worvy-ui/devices?worvyip=" + connected;
         console.log("Connected: ", connected);
       }
     }, err => console.log(err));
@@ -52,7 +53,6 @@ export class DiscoverComponent implements OnInit {
     if (stepGrp.selectedIndex < stepGrp._steps.length - 1) {
       this.matStepper.selectedIndex++;
     } else {
-
       this.matStepper.selectedIndex = 0;
     }
   }
