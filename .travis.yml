@@ -7,7 +7,6 @@ branches:
   only:
   - master
 before_script:
-  - cd worvy-ui
   - npm install -g @angular/cli
 script:
   # - ng lint
@@ -18,7 +17,7 @@ deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
-  local_dir: worvy-ui/dist/worvy-ui
+  local_dir: dist/worvy-ui
   on:
     branch: master
 notifications:
