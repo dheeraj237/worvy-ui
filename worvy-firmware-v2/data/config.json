@@ -1,0 +1,9 @@
+{
+    "deviceid": "e2c023dc-eac2-11e9-81b4-2a2ae2dbcce4",
+    "accountid": "e2c02a08-eac2-11e9-81b4-2a2ae2dbcce4",
+    "userid": "XCbUDYeQk8QSgnxLaRKeG7ESWmA3",
+    "region": "ap-south-1",
+    "iot_endpoint": "a26b9ws68ewvrt-ats.iot.ap-south-1.amazonaws.com",
+    "mqtt_topic": "com.orion.iot/e2c023dc-eac2-11e9-81b4-2a2ae2dbcce4",
+    "name": "worvy"
+}
