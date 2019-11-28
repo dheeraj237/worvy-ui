@@ -12,7 +12,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class DiscoverComponent implements OnInit {
 
-  // @ViewChild('matgroup', { static: true }) matgroup: MatTabGroup;
+  @ViewChild('matgroup', { static: true }) matgroup: MatTabGroup;
   @ViewChild('stepper', { static: true }) matStepper: MatStepper;
 
   hosts: string[] = ['192.168.4.1', '172.217.28.1'];
@@ -33,20 +33,16 @@ export class DiscoverComponent implements OnInit {
     }, err => console.log(err));
   }
 
-  // nextTab(tabGroup: MatTabGroup) {
-  //   if (tabGroup.selectedIndex < tabGroup._tabs.length - 1) {
-  //     this.matgroup.selectedIndex++;
-  //   } else {
-  //     this.matgroup.selectedIndex = 0;
-  //   }
-  // }
+  nextTab(tabGroup: MatTabGroup) {
+    if (tabGroup.selectedIndex < tabGroup._tabs.length - 1) {
+      this.matgroup.selectedIndex++;
+    } else {
+      this.matgroup.selectedIndex = 0;
+    }
+  }
 
   nextStep(stepGrp: MatStepper) {
-    console.log('stepGrp ', stepGrp, this.matStepper.selectedIndex);
-    if (this.matStepper.selectedIndex == 0) {
-      console.log('redirecting to in secure page...')
-      // this.goToInSecure();
-    }
+    console.log('stepGrp ', stepGrp);
     if (stepGrp.selectedIndex < stepGrp._steps.length - 1) {
       this.matStepper.selectedIndex++;
     } else {

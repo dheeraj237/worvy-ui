@@ -1,0 +1,17 @@
+img {
+    vertical-align: middle;
+    border-style: none;
+    height: 100%;
+    width: 100%;
+}
+
+// .mainDiv {
+//     position: relative;
+// }
+
+.float-br {
+    z-index: 1000;
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+}

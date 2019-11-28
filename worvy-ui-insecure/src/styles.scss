@@ -1,0 +1,55 @@
+// @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+@import "~bootstrap/scss/bootstrap.scss";
+
+body {
+    font-family: Roboto, Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+#toolbarMenu {
+    cursor: pointer;
+    margin-right: 20px;
+}
+#mainToolbar .toolbar-spacer{
+    flex: 1 1 auto;
+}
+#mainToolbar .toolbar-icon{
+    cursor: pointer;
+    margin: 0 8px;
+}
+
+
+#sidenavContainer {
+    margin-top: 55px;
+}
+#sidenav {
+    width: 260px;
+    height: 100%;
+}
+#sidenav .avatar{
+    background-image: url('http://i.pravatar.cc/300');
+    background-size: cover;
+}
+#sidenav .menu-item {
+    width: 100%;
+    border-radius: 0;
+    text-align: left;
+}
+#sidenav .menu-item :hover {
+    background:#eee;
+}
+#sidenav .menu-item mat-icon {
+    margin-right: 20px;
+    margin-left: 15px;
+}
+.dash-list h3{
+    padding: 15px;
+}
+
+.ldr-blank {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}

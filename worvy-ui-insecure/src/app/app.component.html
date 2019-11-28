@@ -1,0 +1,47 @@
+<app-progressbar></app-progressbar>
+<mat-toolbar id="mainToolbar" color="primary">
+  <mat-icon id="toolbarMenu" (click)="sidenav.toggle()">
+    menu
+  </mat-icon>
+  <!-- <mat-icon style="margin-right: 10px;">
+    <img alt="Image" src="assets/img/toolbar-logo.png" style="width: 100%;height: auto;">
+  </mat-icon> -->
+  {{title}}
+  <span class="toolbar-spacer"></span>
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Change Theme">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <div mat-menu-item>
+      <span>Dark Theme</span>&nbsp;&nbsp;
+      <mat-slide-toggle (change)="onSetTheme($event)"></mat-slide-toggle>
+    </div>
+  </mat-menu>
+  <!-- <mat-icon class="toolbar-icon" matBadge="8" matBadgePosition="after" matBadgeColor="accent">notifications</mat-icon> -->
+</mat-toolbar>
+<mat-sidenav-container fullscreen id="sidenavContainer" class="app-container">
+  <mat-sidenav mode="over" #sidenav id="sidenav" closed>
+    <mat-list id="menus">
+      <!-- <mat-nav-list>
+        <a class="menu-item" mat-list-item routerLink="/about" (click)=" sidenav.toggle()">
+          <mat-icon>
+            outlined_flag
+          </mat-icon>About Us
+        </a>
+      </mat-nav-list> -->
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- chatbot dialogue component -->
+    <!-- <app-chat-dialogue></app-chat-dialogue> -->
+    <div [@routeAnimations]="prepareRoute(outlet)">
+      <router-outlet #outlet="outlet">
+        <div *ngIf="routerLoading" class="ldr-blank">
+          <i class="fa fa-spinner fa-pulse fa-fw"></i>
+          <span class="sr-only">Loading...</span>
+        </div>
+      </router-outlet>
+    </div>
+    <!-- <router-outlet></router-outlet> -->
+  </mat-sidenav-content>
+</mat-sidenav-container>
