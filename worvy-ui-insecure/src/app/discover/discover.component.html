@@ -1,5 +1,5 @@
 <div class="container">
-    <mat-horizontal-stepper labelPosition="bottom" #stepper>
+    <mat-horizontal-stepper [linear]="true" labelPosition="bottom" #stepper>
         <mat-step>
             <div class="m-3">
                 <h5>
@@ -53,7 +53,7 @@
         </mat-step>
         <mat-step>
             <div class="m-3">
-                <h5>
+                <h5 style="color: green">
                     Worvy Connected
                 </h5>
                 <mat-divider></mat-divider>
@@ -62,6 +62,11 @@
                 </p>
                 <p>
                     GET WIFI LIST FROM WORVY AND SELECT ONE DEVICE TO SET NETWORK WIFI.
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input matInput placeholder="Enter Device Name" [(ngModel)]="deviceName" type="text">
+                    </mat-form-field>
                 </p>
             </div>
         </mat-step>
@@ -80,7 +85,8 @@
             </div>
         </mat-step>
     </mat-horizontal-stepper>
-    <button mat-fab class="float-br" color="primary" aria-label="Next Step" (click)="nextStep(stepper)">
+    <button mat-fab class="float-br" color="primary" [disabled]="matStepper.selectedIndex === 3 && !deviceName"
+        aria-label="Next Step" (click)="nextStep(stepper)">
         <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
 </div>

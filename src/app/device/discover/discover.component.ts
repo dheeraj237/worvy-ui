@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTabGroup, MatTabChangeEvent, MatStep, MatStepLabel, MatStepper } from '@angular/material';
 
-import { first } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import { first, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { User } from 'worvy-ui-insecure/src/app/core/models/user.model';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-discover',
@@ -19,9 +22,12 @@ export class DiscoverComponent implements OnInit {
   public connected$ = new BehaviorSubject<string>('');
   public connState: boolean;
   location: Location;
+  accountRef: any = {};
 
   constructor(
     private httpClient: HttpClient,
+    public afAuth: AngularFireAuth,
+    private afs: AngularFirestore,
   ) { }
 
   ngOnInit() {
@@ -31,8 +37,22 @@ export class DiscoverComponent implements OnInit {
         console.log("Connected: ", connected);
       }
     }, err => console.log(err));
-  }
 
+    this.afAuth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+        } else {
+          return of(null);
+        }
+      })
+    ).subscribe(data => {
+      this.accountRef.userid = data.uid;
+      this.accountRef.accountid = data.accountid;
+    })
+  }
+// 
+  // *ngIf="afAuth.authState | async as user; else loginheader"
   // nextTab(tabGroup: MatTabGroup) {
   //   if (tabGroup.selectedIndex < tabGroup._tabs.length - 1) {
   //     this.matgroup.selectedIndex++;
@@ -45,7 +65,7 @@ export class DiscoverComponent implements OnInit {
     console.log('stepGrp ', stepGrp, this.matStepper.selectedIndex);
     if (this.matStepper.selectedIndex == 0) {
       console.log('redirecting to in secure page...')
-      // this.goToInSecure();
+      this.goToInSecure();
     }
     if (stepGrp.selectedIndex < stepGrp._steps.length - 1) {
       this.matStepper.selectedIndex++;
@@ -79,14 +99,9 @@ export class DiscoverComponent implements OnInit {
     this.connected$.next(data);
   }
 
-  goToSecure() {
-    if (location.protocol === 'http:') {
-      window.location.href = location.href.replace('http', 'https');
-    }
-  }
-
   goToInSecure() {
-    window.location.href = "http://worvy-ui.s3-website.ap-south-1.amazonaws.com/discover"
+    console.log('btoa(this.accountRef) ', btoa(JSON.stringify(this.accountRef)));
+    window.location.href = "http://worvy-ui.s3-website.ap-south-1.amazonaws.com/discover?referer=" + btoa(JSON.stringify(this.accountRef));
   }
 
 }
