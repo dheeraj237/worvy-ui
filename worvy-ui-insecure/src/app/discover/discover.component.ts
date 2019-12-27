@@ -3,7 +3,7 @@ import { MatTabGroup, MatTabChangeEvent, MatStep, MatStepLabel, MatStepper } fro
 
 import { first } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -25,6 +25,7 @@ export class DiscoverComponent implements OnInit {
   location: Location;
   refData: any = {};
   deviceName: string;
+  previousId: string;
   devIp;
 
   constructor(
@@ -61,7 +62,12 @@ export class DiscoverComponent implements OnInit {
       this.startPIng();
     }
     if (stepGrp.selectedIndex === 3) {
-      this.setConfig();
+      this.getExistingConfig();
+      // this.setConfig();
+    }
+    if (stepGrp.selectedIndex === 3) {
+      this.getwifiList();
+      // this.setConfig();
     }
     if (stepGrp.selectedIndex < stepGrp._steps.length - 1) {
       this.matStepper.selectedIndex++;
@@ -83,7 +89,9 @@ export class DiscoverComponent implements OnInit {
             this.connected(host);
           },
           err => {
-            console.log('HTTP Error', err);
+            window.alert(`Can't find any network! Please connect to wifi to discover device.`);
+            console.log('POST ping error', err);
+            this.startPIng();
           }
         );
     });
@@ -109,7 +117,19 @@ export class DiscoverComponent implements OnInit {
           console.log("config saved > ", resp);
         },
         err => {
-          console.log('Config Save HTTP Error', err);
+          console.log('POST config error', err);
+        }
+      );
+  }
+
+  getExistingConfig() {
+    this.httpClient.get(`http://${this.devIp}/config.json`)
+      .subscribe(
+        (resp: any) => {
+          this.previousId = resp.deviceid;
+        },
+        err => {
+          console.log('GET config.json error', err);
         }
       );
   }
@@ -120,7 +140,19 @@ export class DiscoverComponent implements OnInit {
   }
 
   goToSecure() {
-    window.location.href = "https://anothergitdev.github.io/worvy-ui/devices";
+    window.location.href = "https://anothergitdev.github.io/worvy-ui/devices" + (this.previousId ? `?id=${this.previousId}` : '');
+  }
+
+  getwifiList() {
+    this.httpClient.get(`http://${this.devIp}/wifi-list`)
+      .subscribe(
+        (resp: any) => {
+          console.log('GET wifi-list resposne',resp)
+        },
+        err => {
+          console.log('GET wifi-list error', err);
+        }
+      );
   }
 
 }

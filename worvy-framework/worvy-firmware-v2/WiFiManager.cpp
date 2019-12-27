@@ -176,6 +176,7 @@ void WiFiManager::setupConfigPortal()
   server->on(String(F("/wifisave")).c_str(), std::bind(&WiFiManager::handleWifiSave, this));
   server->on(String(F("/i")).c_str(), std::bind(&WiFiManager::handleInfo, this));
   server->on(String(F("/r")).c_str(), std::bind(&WiFiManager::handleReset, this));
+  server->on(String(F("/wifi-list")).c_str(), std::bind(&WiFiManager::handleGetWifiList, this));
   //custom pages
   server->on(String(F("/upload")).c_str(), std::bind(&WiFiManager::handleUpload, this));
   server->on(String(F("/config")).c_str(), std::bind(&WiFiManager::handleSaveConfig, this));
@@ -523,22 +524,12 @@ void WiFiManager::handlePing()
 
   String message = "ping successful";
 
-  if (server->method() == HTTP_OPTIONS)
-  {
-    server->sendHeader("Access-Control-Allow-Origin", "*");
-    server->sendHeader("Access-Control-Max-Age", "10000");
-    server->sendHeader("Access-Control-Allow-Methods", "PUT,POST,GET,OPTIONS");
-    server->sendHeader("Access-Control-Allow-Headers", "*");
-    server->send(204);
-  }
-  else
-  {
-    server->sendHeader("Access-Control-Allow-Origin", "*");
-    server->sendHeader("Access-Control-Max-Age", "10000");
-    server->sendHeader("Access-Control-Allow-Methods", "PUT,POST,GET,OPTIONS");
-    server->sendHeader("Access-Control-Allow-Headers", "*");
-    server->send(200, "text/plain", message);
-  }
+  sendCors();
+  server->sendHeader("Access-Control-Allow-Origin", "*");
+  server->sendHeader("Access-Control-Max-Age", "10000");
+  server->sendHeader("Access-Control-Allow-Methods", "PUT,POST,GET,OPTIONS");
+  server->sendHeader("Access-Control-Allow-Headers", "*");
+  server->send(200, "text/plain", message);
 }
 
 /** Wifi config page handler */
@@ -724,6 +715,110 @@ void WiFiManager::handleWifi(boolean scan)
   DEBUG_WM(F("Sent config page"));
 }
 
+void WiFiManager::handleGetWifiList()
+{
+  String page = "[";
+
+  int n = WiFi.scanNetworks();
+  DEBUG_WM(F("Scan done"));
+  if (n == 0)
+  {
+    DEBUG_WM(F("No networks found"));
+  }
+  else
+  {
+
+    //sort networks
+    int indices[n];
+    for (int i = 0; i < n; i++)
+    {
+      indices[i] = i;
+    }
+
+    // RSSI SORT
+
+    // old sort
+    for (int i = 0; i < n; i++)
+    {
+      for (int j = i + 1; j < n; j++)
+      {
+        if (WiFi.RSSI(indices[j]) > WiFi.RSSI(indices[i]))
+        {
+          std::swap(indices[i], indices[j]);
+        }
+      }
+    }
+
+    /*std::sort(indices, indices + n, [](const int & a, const int & b) -> bool
+      {
+      return WiFi.RSSI(a) > WiFi.RSSI(b);
+      });*/
+
+    // remove duplicates ( must be RSSI sorted )
+    if (_removeDuplicateAPs)
+    {
+      String cssid;
+      for (int i = 0; i < n; i++)
+      {
+        if (indices[i] == -1)
+          continue;
+        cssid = WiFi.SSID(indices[i]);
+        for (int j = i + 1; j < n; j++)
+        {
+          if (cssid == WiFi.SSID(indices[j]))
+          {
+            DEBUG_WM("DUP AP: " + WiFi.SSID(indices[j]));
+            indices[j] = -1; // set dup aps to index -1
+          }
+        }
+      }
+    }
+
+    //display networks in page
+    for (int i = 0; i < n; i++)
+    {
+      if (indices[i] == -1)
+        continue; // skip dups
+      DEBUG_WM(WiFi.SSID(indices[i]));
+      DEBUG_WM(WiFi.RSSI(indices[i]));
+      int quality = getRSSIasQuality(WiFi.RSSI(indices[i]));
+
+      if (_minimumQuality == -1 || _minimumQuality < quality)
+      {
+        String item = FPSTR(WIFI_ENTITY);
+        String rssiQ;
+        rssiQ += quality;
+        item.replace("{ssid}", WiFi.SSID(indices[i]));
+        item.replace("{strenght}", rssiQ);
+        if (WiFi.encryptionType(indices[i]) != ENC_TYPE_NONE)
+        {
+          item.replace("{secure}", "true");
+        }
+        else
+        {
+          item.replace("{secure}", "false");
+        }
+        //DEBUG_WM(item);
+        page += item;
+        delay(0);
+      }
+      else
+      {
+        DEBUG_WM(F("Skipping due to quality"));
+      }
+    }
+    page += "]";
+    page.replace("},]", "}]");
+  }
+  server->sendHeader("Content-Length", String(page.length()));
+  sendCors();
+  server->sendHeader("Access-Control-Allow-Origin", "*");
+  server->sendHeader("Access-Control-Max-Age", "10000");
+  server->sendHeader("Access-Control-Allow-Methods", "PUT,POST,GET,OPTIONS");
+  server->sendHeader("Access-Control-Allow-Headers", "*");
+  server->send(200, "application/json", page);
+}
+
 /** Handle the WLAN save form and redirect to WLAN config page again */
 void WiFiManager::handleWifiSave()
 {
@@ -772,21 +867,20 @@ void WiFiManager::handleWifiSave()
     optionalIPFromString(&_sta_static_sn, sn.c_str());
   }
 
-  String page = FPSTR(HTTP_HEADER);
-  page.replace("{v}", "Credentials Saved");
-  page += FPSTR(HTTP_SCRIPT);
-  page += FPSTR(HTTP_STYLE);
-  page += _customHeadElement;
-  page += FPSTR(HTTP_HEADER_END);
-  page += FPSTR(HTTP_SAVED);
-  page += FPSTR(HTTP_END);
+  String page = "Credentials Saved.";
 
   server->sendHeader("Content-Length", String(page.length()));
-  server->send(200, "text/html", page);
+  sendCors();
+  server->sendHeader("Access-Control-Allow-Origin", "*");
+  server->sendHeader("Access-Control-Max-Age", "10000");
+  server->sendHeader("Access-Control-Allow-Methods", "PUT,POST,GET,OPTIONS");
+  server->sendHeader("Access-Control-Allow-Headers", "*");
+  server->send(200, "text/plain", page);
 
   DEBUG_WM(F("Sent wifi save page"));
 
   connect = true; //signal ready to connect/reset
+  ESP.reset(); //restart worvy
 }
 
 /** Handle the info page */
@@ -874,37 +968,27 @@ void WiFiManager::handleNotFound()
     message += " " + server->argName(i) + ": " + server->arg(i) + "\n";
   }
 
-  if (server->method() == HTTP_OPTIONS)
+  sendCors();
+  if (!handleFileRead(server->uri()))
   {
-    server->sendHeader("Access-Control-Allow-Origin", "*");
-    server->sendHeader("Access-Control-Max-Age", "10000");
-    server->sendHeader("Access-Control-Allow-Methods", "PUT,POST,GET,OPTIONS");
-    server->sendHeader("Access-Control-Allow-Headers", "*");
-    server->send(204);
-  }
-  else
-  {
-    if (!handleFileRead(server->uri()))
-    {
-      String message = "File Not Found\n\n";
-      message += "URI: ";
-      message += server->uri();
-      message += "\nMethod: ";
-      message += server->method();
-      message += "\nArguments: ";
-      message += server->args();
-      message += "\n";
+    String message = "File Not Found\n\n";
+    message += "URI: ";
+    message += server->uri();
+    message += "\nMethod: ";
+    message += server->method();
+    message += "\nArguments: ";
+    message += server->args();
+    message += "\n";
 
-      for (uint8_t i = 0; i < server->args(); i++)
-      {
-        message += " " + server->argName(i) + ": " + server->arg(i) + "\n";
-      }
-      server->sendHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-      server->sendHeader("Pragma", "no-cache");
-      server->sendHeader("Expires", "-1");
-      server->sendHeader("Content-Length", String(message.length()));
-      server->send(404, "text/plain", message);
+    for (uint8_t i = 0; i < server->args(); i++)
+    {
+      message += " " + server->argName(i) + ": " + server->arg(i) + "\n";
     }
+    server->sendHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    server->sendHeader("Pragma", "no-cache");
+    server->sendHeader("Expires", "-1");
+    server->sendHeader("Content-Length", String(message.length()));
+    server->send(404, "text/plain", message);
   }
 }
 
@@ -1018,14 +1102,7 @@ void WiFiManager::handleUpload()
 
 void WiFiManager::handleSaveConfig()
 {
-  if (server->method() == HTTP_OPTIONS)
-  {
-    server->sendHeader("Access-Control-Allow-Origin", "*");
-    server->sendHeader("Access-Control-Max-Age", "10000");
-    server->sendHeader("Access-Control-Allow-Methods", "PUT,POST,GET,OPTIONS");
-    server->sendHeader("Access-Control-Allow-Headers", "*");
-    server->send(204);
-  }
+  sendCors();
   char output[256];
   String message;
   message += server->arg("plain");
@@ -1068,6 +1145,11 @@ bool WiFiManager::handleFileRead(String path)
     if (SPIFFS.exists(pathWithGz))                       // If there's a compressed version available
       path += ".gz";                                     // Use the compressed verion
     File file = SPIFFS.open(path, "r");                  // Open the file
+
+    server->sendHeader("Access-Control-Allow-Origin", "*");
+    server->sendHeader("Access-Control-Max-Age", "10000");
+    server->sendHeader("Access-Control-Allow-Methods", "PUT,POST,GET,OPTIONS");
+    server->sendHeader("Access-Control-Allow-Headers", "*");
     size_t sent = server->streamFile(file, contentType); // Send it to the client
     file.close();                                        // Close the file again
     Serial.println(String("\tSent file: ") + path);
@@ -1094,4 +1176,15 @@ String WiFiManager::getContentType(String filename)
   else if (filename.endsWith(".json"))
     return "application/json";
   return "text/plain";
+}
+
+void WiFiManager::sendCors() {
+  if (server->method() == HTTP_OPTIONS)
+  {
+    server->sendHeader("Access-Control-Allow-Origin", "*");
+    server->sendHeader("Access-Control-Max-Age", "10000");
+    server->sendHeader("Access-Control-Allow-Methods", "PUT,POST,GET,OPTIONS");
+    server->sendHeader("Access-Control-Allow-Headers", "*");
+    server->send(204);
+  }
 }

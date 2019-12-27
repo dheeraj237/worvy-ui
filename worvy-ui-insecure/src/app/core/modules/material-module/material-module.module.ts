@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatProgressBarModule, MatMenuModule, MatSlideToggleModule, MatDividerModule, MatGridListModule, MatTabsModule, MatStepperModule } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export const MY_FORMATS = {
   parse: {
@@ -55,7 +56,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatDividerModule,
     MatGridListModule,
     MatTabsModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDialogModule
   ],
   exports: [
     MatToolbarModule,
@@ -78,7 +80,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatDividerModule,
     MatGridListModule,
     MatTabsModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDialogModule
 
   ],
   providers: [

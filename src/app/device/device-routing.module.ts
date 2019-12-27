@@ -7,12 +7,12 @@ import { AuthGuard } from '../core/guards/guard.guard';
 
 const routes: Routes = [
   {
-    path: 'devices', component: ListComponent, canActivate: [AuthGuard], data: {
+    path: '', component: ListComponent, canActivate: [AuthGuard], data: {
       animation: 'DevicePage'
     }
   },
   {
-    path: 'devices/discover', component: DiscoverComponent, data: {
+    path: 'discover', component: DiscoverComponent, data: {
       animation: 'DiscoverPage'
     }
   },

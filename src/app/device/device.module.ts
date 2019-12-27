@@ -19,6 +19,10 @@ import { DiscoverComponent } from './discover/discover.component';
     CommonModule,
     MaterialModule,
     DeviceRoutingModule
+  ],
+  exports: [
+    ListComponent,
+    DiscoverComponent
   ]
 })
 export class DeviceModule { }

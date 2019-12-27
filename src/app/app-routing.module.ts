@@ -23,7 +23,12 @@ const routes: Routes = [
     data: {
       animation: 'AboutPage'
     }
-  }
+  },
+  {
+    path: 'devices',
+    loadChildren: './device/device.module#DeviceModule'
+  },
+  { path: '**', redirectTo: ''}
 ];
 
 @NgModule({

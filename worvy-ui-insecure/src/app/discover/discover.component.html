@@ -3,34 +3,22 @@
         <mat-step>
             <div class="m-3">
                 <h5>
-                    Welcome to Worvy!
+                    Begin Worvy Setup!
                 </h5>
                 <mat-divider></mat-divider>
                 <div class="mt-4">
-                    Get started with these easy steps:
-                    <ul class="mt-2">
-                        <li>
-                            Connect your device to Wi-Fi
-                        </li>
-                        <li>
-                            Learn how to use your device
-                        </li>
-                        <li>
-                            Let's get your device connected to wifi so we can start using it.
-                            Connect your device to Wi-Fi
-                        </li>
-                    </ul>
+                    Let's get your worvy connected to wifi so you can start using it. click next button to continue.
                 </div>
             </div>
         </mat-step>
         <mat-step>
             <div class="m-3">
                 <h5>
-                    Plug In
+                    Wait for the device to power up
                 </h5>
                 <mat-divider></mat-divider>
                 <p class="mt-4">
-                    Plug In your device to USB and wait for some moment to start up hotsport on device.
+                    Plug In your device to USB and wait for some moment to start the device.
                 </p>
             </div>
         </mat-step>
@@ -42,12 +30,7 @@
                 <mat-divider></mat-divider>
                 <p class="mt-4">
                     Go To your wifi settings on this device you are using and select the network of the
-                    format <b>WORVY-XXXX</b>. It may take up to a minute to display. Wait until you are successfully
-                    connected to this wif, then return to this screen.
-                </p>
-                <p>
-                    Pinging to the local network for device discovery... continous ping to ip address. successfull ping
-                    will load next step. &#x1F44D;
+                    format <b>WORVY-XXXX</b>. It may take up to a minute to display. Wait until you are successfully connected to this wifi.
                 </p>
             </div>
         </mat-step>
@@ -85,8 +68,17 @@
             </div>
         </mat-step>
     </mat-horizontal-stepper>
-    <button mat-fab class="float-br" color="primary" [disabled]="matStepper.selectedIndex === 3 && !deviceName"
+    <button mat-fab class="float-br" color="primary" [disabled]="matStepper.selectedIndex === 2 || matStepper.selectedIndex === 3 && !deviceName"
         aria-label="Next Step" (click)="nextStep(stepper)">
         <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
+</div>
+<div #dialogue style="display:none;">
+    <h1 mat-dialog-title>No network connected!</h1>
+    <div mat-dialog-content>
+        <p>Please Connect to wifi to discover device.</p>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button cdkFocusInitial>Ok</button>
+    </div>
 </div>

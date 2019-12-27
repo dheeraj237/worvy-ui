@@ -1,97 +1,31 @@
 <div class="container">
-    <mat-horizontal-stepper labelPosition="bottom" #stepper>
-        <mat-step>
-            <div class="m-3">
-                <h5>
-                    Welcome to Worvy!
-                </h5>
-                <mat-divider></mat-divider>
-                <div class="mt-4">
-                    Get started with these easy steps:
-                    <ul class="mt-2">
-                        <li>
-                            Connect your device to Wi-Fi
-                        </li>
-                        <li>
-                            Learn how to use your device
-                        </li>
-                        <li>
-                            Let's get your device connected to wifi so we can start using it.
-                            Connect your device to Wi-Fi
-                        </li>
-                    </ul>
-                </div>
+    <div class="m-4">
+        <div class="mx-auto">
+            <h5>
+                Welcome to Worvy!
+            </h5>
+            <mat-divider></mat-divider>
+            <div class="mt-4">
+                Get started with these easy steps:
+                <ul class="mt-2">
+                    <li>
+                        Connect your device to Wi-Fi
+                    </li>
+                    <li>
+                        Learn how to use your device
+                    </li>
+                    <li>
+                        Let's get your device connected to wifi so we can start using it.
+                        Connect your device to Wi-Fi
+                    </li>
+                </ul>
             </div>
-        </mat-step>
-        <mat-step>
-            <div class="m-3">
-                <h5>
-                    Let's get Started
-                </h5>
-                <mat-divider></mat-divider>
-                <div class="mt-4">
-                    Go to next tab ( click > ) and follow the instruction to pair your worvy.
-                </div>
+            <div class="row justify-content-center">
+                <button mat-flat-button color="primary"
+                    (click)="goToInSecure()">
+                    Begin Setup
+                </button>
             </div>
-        </mat-step>
-        <mat-step>
-            <div class="m-3">
-                <h5>
-                    Plug In
-                </h5>
-                <mat-divider></mat-divider>
-                <p class="mt-4">
-                    Plug In your device to USB and wait for some moment to start up hotsport on device.
-                </p>
-            </div>
-        </mat-step>
-        <mat-step>
-            <div class="m-3">
-                <h5>
-                    Connect To Wifi
-                </h5>
-                <mat-divider></mat-divider>
-                <p class="mt-4">
-                    Go To your wifi settings on this device you are using and select the network of the
-                    format <b>WORVY-XXXX</b>. It may take up to a minute to display. Wait until you are successfully
-                    connected to this wif, then return to this screen.
-                </p>
-                <p>
-                    Pinging to the local network for device discovery... continous ping to ip address. successfull ping
-                    will load next step.
-                </p>
-            </div>
-        </mat-step>
-        <mat-step>
-            <div class="m-3">
-                <h5>
-                    Worvy Connected
-                </h5>
-                <mat-divider></mat-divider>
-                <p class="mt-4">
-                    Picture of worvy
-                </p>
-                <p>
-                    GET WIFI LIST FROM WORVY AND SELECT ONE DEVICE TO SET NETWORK WIFI.
-                </p>
-            </div>
-        </mat-step>
-        <mat-step>
-            <div class="m-3">
-                <h5>
-                    Connect To Your Wifi Router
-                </h5>
-                <mat-divider></mat-divider>
-                <p class="mt-4">
-                    LIST OF WIFI
-                </p>
-                <p>
-                    GET WIFI LIST FROM WORVY AND SELECT ONE DEVICE TO SET NETWORK WIFI.
-                </p>
-            </div>
-        </mat-step>
-    </mat-horizontal-stepper>
-    <button mat-fab class="float-br" color="primary" aria-label="Next Step" (click)="nextStep(stepper)">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-    </button>
+        </div>
+    </div>
 </div>
