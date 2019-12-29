@@ -27,6 +27,11 @@ export class DiscoverComponent implements OnInit {
   deviceName: string;
   previousId: string;
   devIp;
+  loadingWifiList: boolean = false;
+  wifiForm: boolean = false;
+  wifissid: string = '';
+  wifipass: string = '';
+  wifiList: any[] = [];
 
   constructor(
     private httpClient: HttpClient,
@@ -63,7 +68,7 @@ export class DiscoverComponent implements OnInit {
     }
     if (stepGrp.selectedIndex === 3) {
       this.getExistingConfig();
-      // this.setConfig();
+      this.setConfig();
     }
     if (stepGrp.selectedIndex === 3) {
       this.getwifiList();
@@ -71,8 +76,6 @@ export class DiscoverComponent implements OnInit {
     }
     if (stepGrp.selectedIndex < stepGrp._steps.length - 1) {
       this.matStepper.selectedIndex++;
-    } else {
-      this.goToSecure();
     }
   }
 
@@ -144,15 +147,53 @@ export class DiscoverComponent implements OnInit {
   }
 
   getwifiList() {
+    this.wifiForm = false;
+    this.loadingWifiList = true;
+    this.wifiList = [];
+    this.wifipass = '';
     this.httpClient.get(`http://${this.devIp}/wifi-list`)
       .subscribe(
         (resp: any) => {
-          console.log('GET wifi-list resposne',resp)
+          this.loadingWifiList = false;
+          console.log('GET wifi-list resposne',resp);
+          this.wifiList = resp;
         },
         err => {
+          this.loadingWifiList = false;
           console.log('GET wifi-list error', err);
         }
       );
+  }
+
+  hideWifiForm(){
+    this.wifiForm = false;
+  }
+
+  showWifiForm(ssid: string) {
+    this.wifiForm = true;
+    this.wifissid = ssid;
+  }
+
+  connectWifi() {
+    this.matStepper.selectedIndex++;
+    this.httpClient.get(`http://${this.devIp}/wifisave`, {
+      params: {
+        s: this.wifissid,
+        p: this.wifipass
+      },
+      observe: 'response'
+    })
+    .toPromise()
+    .then(response => {
+      setTimeout(() => {
+        this.goToSecure();
+      }, 15000 );
+      console.log(response);
+    })
+    .catch(console.log);
+    setTimeout(() => {
+      this.goToSecure();
+    }, 15000 );
   }
 
 }

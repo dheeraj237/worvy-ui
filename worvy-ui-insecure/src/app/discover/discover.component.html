@@ -2,9 +2,9 @@
     <mat-horizontal-stepper [linear]="true" labelPosition="bottom" #stepper>
         <mat-step>
             <div class="m-3">
-                <h5>
+                <h4>
                     Begin Worvy Setup!
-                </h5>
+                </h4>
                 <mat-divider></mat-divider>
                 <div class="mt-4">
                     Let's get your worvy connected to wifi so you can start using it. click next button to continue.
@@ -13,9 +13,9 @@
         </mat-step>
         <mat-step>
             <div class="m-3">
-                <h5>
+                <h4>
                     Wait for the device to power up
-                </h5>
+                </h4>
                 <mat-divider></mat-divider>
                 <p class="mt-4">
                     Plug In your device to USB and wait for some moment to start the device.
@@ -24,9 +24,9 @@
         </mat-step>
         <mat-step>
             <div class="m-3">
-                <h5>
+                <h4>
                     Connect To Wifi
-                </h5>
+                </h4>
                 <mat-divider></mat-divider>
                 <p class="mt-4">
                     Go To your wifi settings on this device you are using and select the network of the
@@ -36,9 +36,9 @@
         </mat-step>
         <mat-step>
             <div class="m-3">
-                <h5 style="color: green">
+                <h4 style="color: green">
                     Worvy Connected
-                </h5>
+                </h4>
                 <mat-divider></mat-divider>
                 <p class="mt-4">
                     Picture of worvy
@@ -55,16 +55,94 @@
         </mat-step>
         <mat-step>
             <div class="m-3">
-                <h5>
+                <h4>
                     Connect To Your Wifi Router
-                </h5>
+                </h4>
                 <mat-divider></mat-divider>
+                <div *ngIf="loadingWifiList">
+                    <p class="mt-4">
+                        Scanning for Available Networks
+                    </p>
+                    <p>
+                        <mat-spinner class="mx-auto text-center"></mat-spinner>
+                    </p>
+                </div>
+                <div *ngIf="wifiForm">
+                    <h5 class="mt-4">
+                        Enter Wifi Credentials
+                    </h5>
+                    <p>
+                        <mat-form-field appearance="outline" class="btn-block">
+                          <mat-label>Wifi Name</mat-label>
+                          <input matInput placeholder="Wifi Name" [(ngModel)]="wifissid">
+                          <mat-icon matSuffix>wifi</mat-icon>
+                          <mat-hint>Enter wifi name/ssid</mat-hint>
+                        </mat-form-field>
+                      </p>
+                      <p>
+                        <mat-form-field appearance="outline" class="btn-block">
+                          <mat-label>Password</mat-label>
+                          <input type="password" matInput placeholder="Password" [(ngModel)]="wifipass">
+                          <mat-icon matSuffix>lock</mat-icon>
+                          <mat-hint>Enter password</mat-hint>
+                        </mat-form-field>
+                      </p>
+                      <p>
+                          
+                        <button [disabled]="!wifissid || !wifipass" mat-button color="primary" (click)="connectWifi()">
+                            Connect
+                        </button>
+                        <button mat-button color="primary" (click)="getwifiList()">
+                            <mat-icon>youtube_searched_for</mat-icon>
+                            Rescan
+                        </button>
+                      </p>
+                </div>
+                <div *ngIf="!loadingWifiList && !wifiForm">
+                    <h5 class="mt-4">
+                        List Of Available Wifi
+                    </h5>
+                    <p *ngIf="wifiList.length === 0" class="mt-5">
+                        <mat-icon matSuffix>wifi_off</mat-icon>
+                        <span class="m-2">No wifi network found.</span>
+                        <button mat-button color="primary" (click)="getwifiList()">
+                            Rescan networks
+                        </button>
+                    </p>
+                    <mat-list id="menus" >
+                        <mat-nav-list *ngFor="let wifi of wifiList">
+                            <a class="menu-item" mat-list-item (click)="showWifiForm(wifi.ssid)">
+                                <span>{{wifi.ssid}}</span>
+                                <span class="mx-auto"></span>
+                                <span class="mr-2">
+                                    <mat-icon *ngIf="!wifi.secure">
+                                    wifi
+                                    </mat-icon>
+                                    <mat-icon *ngIf="wifi.secure">
+                                        wifi_lock
+                                    </mat-icon>
+                                </span>
+                                <span class="float-right">{{wifi.strenght}}%</span>
+                            </a>
+                        </mat-nav-list>
+                        <button mat-button color="primary" (click)="getwifiList()">
+                            <mat-icon>youtube_searched_for</mat-icon>
+                            Rescan
+                        </button>
+                    </mat-list>
+                </div>
+            </div>
+        </mat-step>
+        <mat-step>
+            <div class="m-3">
+                <h4>
+                    Setting up device network
+                </h4>
                 <p class="mt-4">
-                    LIST OF WIFI
+                    please wait while we are finalizing setting up your device. it will redirect to your app home page.
                 </p>
-                <p>
-                    GET WIFI LIST FROM WORVY AND SELECT ONE DEVICE TO SET NETWORK WIFI.
-                </p>
+                <mat-hint>After redirect if you fail to reconnect to your wifi you can manually connect to wifi and reload this page.</mat-hint>
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
             </div>
         </mat-step>
     </mat-horizontal-stepper>
