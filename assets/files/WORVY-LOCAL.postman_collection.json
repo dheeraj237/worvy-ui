@@ -1,0 +1,90 @@
+{
+	"variables": [],
+	"info": {
+		"name": "WORVY-LOCAL",
+		"_postman_id": "9392cc7d-e7ca-de5b-4515-d4e33994eb5c",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "config",
+			"request": {
+				"url": "192.168.4.1/config",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"deviceid\": \"e2c023dc-eac2-11e9-81b4-2a2ae2dbcce4\",\r\n    \"accountid\": \"e2c02a08-eac2-11e9-81b4-2a2ae2dbcce4\",\r\n    \"userid\": \"XCbUDYeQk8QSgnxLaRKeG7ESWmA3\",\r\n    \"region\": \"ap-south-1\",\r\n    \"iot_endpoint\": \"a26b9ws68ewvrt-ats.iot.ap-south-1.amazonaws.com\",\r\n    \"mqtt_topic\": \"com.orion.iot/e2c023dc-eac2-11e9-81b4-2a2ae2dbcce4\",\r\n    \"name\":\"worvy-dev\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "wifi-list",
+			"request": {
+				"url": "192.168.4.1/wifi-list",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "wifisave",
+			"request": {
+				"url": {
+					"raw": "192.168.4.1/wifisave?s=OnePlus 5&p=12345687",
+					"host": [
+						"192",
+						"168",
+						"4",
+						"1"
+					],
+					"path": [
+						"wifisave"
+					],
+					"query": [
+						{
+							"key": "s",
+							"value": "OnePlus 5",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "p",
+							"value": "12345687",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "config.json",
+			"request": {
+				"url": "192.168.4.1/config.json",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
