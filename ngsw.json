@@ -1,0 +1,110 @@
+{
+  "configVersion": 1,
+  "timestamp": 1616818232645,
+  "index": "https://dheeraj237.github.io/worvy-ui/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://dheeraj237.github.io/worvy-ui/5-es2015.21dff98f0838a901969a.js",
+        "https://dheeraj237.github.io/worvy-ui/5-es5.21dff98f0838a901969a.js",
+        "https://dheeraj237.github.io/worvy-ui/favicon.ico",
+        "https://dheeraj237.github.io/worvy-ui/index.html",
+        "https://dheeraj237.github.io/worvy-ui/main-es2015.335b3724550e806f89b4.js",
+        "https://dheeraj237.github.io/worvy-ui/main-es5.335b3724550e806f89b4.js",
+        "https://dheeraj237.github.io/worvy-ui/manifest.webmanifest",
+        "https://dheeraj237.github.io/worvy-ui/polyfills-es2015.2987770fde9daa1d8a2e.js",
+        "https://dheeraj237.github.io/worvy-ui/polyfills-es5.ef4b1e1fc703b3ff76e3.js",
+        "https://dheeraj237.github.io/worvy-ui/runtime-es2015.410d7bfc1fc0689d673e.js",
+        "https://dheeraj237.github.io/worvy-ui/runtime-es5.410d7bfc1fc0689d673e.js",
+        "https://dheeraj237.github.io/worvy-ui/styles.5b0f4e3f3bb387ae053a.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://dheeraj237.github.io/worvy-ui/assets/files/WORVY-LOCAL.postman_collection.json",
+        "https://dheeraj237.github.io/worvy-ui/assets/icons/icon-128x128.png",
+        "https://dheeraj237.github.io/worvy-ui/assets/icons/icon-144x144.png",
+        "https://dheeraj237.github.io/worvy-ui/assets/icons/icon-152x152.png",
+        "https://dheeraj237.github.io/worvy-ui/assets/icons/icon-192x192.png",
+        "https://dheeraj237.github.io/worvy-ui/assets/icons/icon-384x384.png",
+        "https://dheeraj237.github.io/worvy-ui/assets/icons/icon-512x512.png",
+        "https://dheeraj237.github.io/worvy-ui/assets/icons/icon-72x72.png",
+        "https://dheeraj237.github.io/worvy-ui/assets/icons/icon-96x96.png",
+        "https://dheeraj237.github.io/worvy-ui/assets/images/about-large.jpg",
+        "https://dheeraj237.github.io/worvy-ui/fontawesome-webfont.674f50d287a8c48dc19b.eot",
+        "https://dheeraj237.github.io/worvy-ui/fontawesome-webfont.912ec66d7572ff821749.svg",
+        "https://dheeraj237.github.io/worvy-ui/fontawesome-webfont.af7ae505a9eed503f8b8.woff2",
+        "https://dheeraj237.github.io/worvy-ui/fontawesome-webfont.b06871f281fee6b241d6.ttf",
+        "https://dheeraj237.github.io/worvy-ui/fontawesome-webfont.fee66e712a8a08eef580.woff"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "headlines",
+      "patterns": [
+        "https:\\/\\/ccnnen1pn6\\.execute-api\\.ap-south-1\\.amazonaws\\.com\\/.*"
+      ],
+      "strategy": "freshness",
+      "maxSize": 10,
+      "maxAge": 86400000,
+      "timeoutMs": 5000,
+      "version": 1
+    }
+  ],
+  "hashTable": {
+    "https://dheeraj237.github.io/worvy-ui/5-es2015.21dff98f0838a901969a.js": "c6a08c12a252366bac7ad7d44979065e1b83fa56",
+    "https://dheeraj237.github.io/worvy-ui/5-es5.21dff98f0838a901969a.js": "c6a08c12a252366bac7ad7d44979065e1b83fa56",
+    "https://dheeraj237.github.io/worvy-ui/assets/files/WORVY-LOCAL.postman_collection.json": "8483f7c118049f4c229288f6a2088cfa900a97f9",
+    "https://dheeraj237.github.io/worvy-ui/assets/icons/icon-128x128.png": "8ba139f8527bef8f0b2707d335a4f38ed01dcf8e",
+    "https://dheeraj237.github.io/worvy-ui/assets/icons/icon-144x144.png": "6f2bf2e77c5200f2cfc6980678e288857fcd5795",
+    "https://dheeraj237.github.io/worvy-ui/assets/icons/icon-152x152.png": "96f0181c68634c060c32a33ae5bbe372312a29da",
+    "https://dheeraj237.github.io/worvy-ui/assets/icons/icon-192x192.png": "159970006dade9416d9b27b33efb427ba8bd4df7",
+    "https://dheeraj237.github.io/worvy-ui/assets/icons/icon-384x384.png": "c88e86400f379a9d9a52647699f11615812edd06",
+    "https://dheeraj237.github.io/worvy-ui/assets/icons/icon-512x512.png": "0f9e11ba3df7cc45308cfdc9d0337fa00845ff80",
+    "https://dheeraj237.github.io/worvy-ui/assets/icons/icon-72x72.png": "748a38a92d079993ddd1ee449d6878f8ae4a9c5d",
+    "https://dheeraj237.github.io/worvy-ui/assets/icons/icon-96x96.png": "3438b25761f4691d26250c5c7d4a9c49aa93f434",
+    "https://dheeraj237.github.io/worvy-ui/assets/images/about-large.jpg": "2b93a05c282a344003cb5c1d6f9954256eddff5c",
+    "https://dheeraj237.github.io/worvy-ui/favicon.ico": "d9bfdc419bd696f29923e4cc5c182e887581e44f",
+    "https://dheeraj237.github.io/worvy-ui/fontawesome-webfont.674f50d287a8c48dc19b.eot": "d980c2ce873dc43af460d4d572d441304499f400",
+    "https://dheeraj237.github.io/worvy-ui/fontawesome-webfont.912ec66d7572ff821749.svg": "98a8aa5cf7d62c2eff5f07ede8d844b874ef06ed",
+    "https://dheeraj237.github.io/worvy-ui/fontawesome-webfont.af7ae505a9eed503f8b8.woff2": "d6f48cba7d076fb6f2fd6ba993a75b9dc1ecbf0c",
+    "https://dheeraj237.github.io/worvy-ui/fontawesome-webfont.b06871f281fee6b241d6.ttf": "13b1eab65a983c7a73bc7997c479d66943f7c6cb",
+    "https://dheeraj237.github.io/worvy-ui/fontawesome-webfont.fee66e712a8a08eef580.woff": "28b782240b3e76db824e12c02754a9731a167527",
+    "https://dheeraj237.github.io/worvy-ui/index.html": "ef901b88e1694d1c8e9840dc86311f009bb67488",
+    "https://dheeraj237.github.io/worvy-ui/main-es2015.335b3724550e806f89b4.js": "92b46a6d20df8b54680f08044a325ecf2aa4d175",
+    "https://dheeraj237.github.io/worvy-ui/main-es5.335b3724550e806f89b4.js": "f6ccc79802976df9ae3fd47b13b0e4a68bb32a9d",
+    "https://dheeraj237.github.io/worvy-ui/manifest.webmanifest": "d116a8ff8b2c6273928450a24114c8d8f5a203c7",
+    "https://dheeraj237.github.io/worvy-ui/polyfills-es2015.2987770fde9daa1d8a2e.js": "cf5cbfa9134716054fb479ab21362146cdf1f2ff",
+    "https://dheeraj237.github.io/worvy-ui/polyfills-es5.ef4b1e1fc703b3ff76e3.js": "45c51483238468881240579c3fdecd19144cff17",
+    "https://dheeraj237.github.io/worvy-ui/runtime-es2015.410d7bfc1fc0689d673e.js": "26c419b0a7885424b4d4cda6af27ac1617f1976d",
+    "https://dheeraj237.github.io/worvy-ui/runtime-es5.410d7bfc1fc0689d673e.js": "50d0f7f5f70a3144af3ae0a3b20f0a76b00a298f",
+    "https://dheeraj237.github.io/worvy-ui/styles.5b0f4e3f3bb387ae053a.css": "defcef341b293552fe4026434c4b3604bdb4dff5"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
